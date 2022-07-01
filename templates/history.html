@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %}
+  Weather history
+{% endblock %}
+
+{% block body %}
+    <div class="album py-5 bg-light">
+      <div class="container">
+      </div>
+        {% for weather in weathers %}
+            <div class="col">
+              <div class="row d-flex justify-content-center">
+
+                  <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                      <div class="col p-4 d-flex flex-column positiosn-static">
+                        <strong class="d-inline-block mb-2 text-primary">Weather forecast for {{ weather.date }}</strong>
+                          <h2 class="mb-0 text-center mt-3"> {{ weather.city }}</h2>
+                        <h2 class="mb-0 text-center mt-3">
+                            {{ weather.temperature }}
+                          <i class="fa-solid fa-temperature-half" style="margin-left: -5px;margin-top:-10px;"></i>
+                        </h2>
+                        <div class="mb-1 text-muted text-center">feels like {{ weather.feels_like }}</div>
+
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+
+                          <div class="col">
+                            <div class="card shadow-sm">
+                              <div class="card-body">
+                                 <div class="d-flex gap-0 w-100 justify-content-between">
+                                   <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" width="35" height="35" class="rounded-circle" style="margin-left: -5px;margin-top:-10px;">
+                                   <div>
+                                      <h6 class="mb-0">SKY</h6>
+                                      <p class="mb-0 opacity-75 text-center" style="margin-left: -20px">{{ weather.description }}</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col">
+                            <div class="card shadow-sm">
+                              <div class="card-body">
+                                 <div class="d-flex gap-1 w-100 justify-content-between">
+                                   <i class="fa-solid fa-water"></i>
+                                   <div>
+                                      <h6 class="mb-0">HUMIDITY</h6>
+                                      <p class="mb-0 opacity-75 text-center">{{ weather.humidity }}</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col">
+                            <div class="card shadow-sm">
+                              <div class="card-body">
+                                 <div class="d-flex gap-0 w-100 justify-content-between">
+                                   <i class="fa-solid fa-wind"></i>
+                                   <div>
+                                      <h6 class="mb-0">WIND</h6>
+                                      <p class="mb-0 opacity-75">{{ weather.wind }} m/s</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col">
+                            <div class="card shadow-sm">
+                              <div class="card-body">
+                                 <div class="d-flex gap-1 w-100 justify-content-between">
+                                   <i class="fa-solid fa-eye"></i>
+                                   <div>
+                                      <h6 class="mb-0">VISIBILITTY</h6>
+                                      <p class="mb-0 opacity-75">{{ weather.visibility }} m</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col">
+                            <div class="card shadow-sm">
+                              <div class="card-body">
+                                 <div class="d-flex gap-0 w-100 justify-content-between">
+                                   <i class="fa-solid fa-sun"></i>
+                                   <div>
+                                      <h6 class="mb-0">SUNRISE</h6>
+                                      <p class="mb-0 opacity-75">{{ weather.sunrise }}</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col">
+                            <div class="card shadow-sm">
+                              <div class="card-body">
+                                 <div class="d-flex gap-0 w-100 justify-content-between">
+                                   <i class="fa-solid fa-sun"></i>
+                                   <div>
+                                      <h6 class="mb-0">SUNSET</h6>
+                                      <p class="mb-0 opacity-75">{{ weather.sunset }}</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% if weathers|length !=0 %}
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <form action="/delete" method="post">
+                <button class="button btn btn-primary btn-lg px-4 gap-3" name="clear" value="clear">Clear</button>
+            </form>
+        </div>
+        {% else %}
+            <div class="album py-5 bg-light">
+              <div class="container">
+                <div class="px-4 py-5 my-5 text-center">
+                    <h1 class="display-5 fw-bold">Search history is clear</h1>
+                  <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">It seems your search history is clear. Start exploring weather in more than 200000 cities by typing the name of the city in the seacrh bar.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
